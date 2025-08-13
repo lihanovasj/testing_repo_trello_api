@@ -2618,8 +2618,33 @@
 				{
 					"name": "Get an Organization",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/organizations/62ab2ed6d2e4491cd2eac663",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"organizations",
+								"62ab2ed6d2e4491cd2eac663"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "APIKey",
+									"disabled": true
+								},
+								{
+									"key": "token",
+									"value": "APIToken' \\",
+									"disabled": true
+								}
+							]
+						}
 					},
 					"response": []
 				}
