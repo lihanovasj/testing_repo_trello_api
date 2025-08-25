@@ -1,9 +1,21 @@
 name: Scheduled run
 
 on: 
+
   schedule:
-  - cron: 30 15 ** 1-5
-  - cron: 30 05 ** 6-7
+
+  - cron: 30 15 * * 1-5
+  - cron: 30 05 * * 6-7
+
+  push:
+
+    branches:
+      - main
+
+  pull_request:
+
+    branches:
+      - main
   
 jobs: 
  
@@ -11,12 +23,30 @@ jobs:
     
     runs-on: ubuntu-latest
 
-   
     steps:
-      
-      - uses: actions/checkout@v4
 
+      - name: Pull Code from Remote Repo
+        uses: actions/checkout@v4
+        
+      - name: Install Node.js
+        uses: actions/setup-node@v4
       
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Install Newman and Htmlextra reporter
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+
+      - name: Run Postman collection with environment and generate reports
+        run: |
+          newman run Trello_testing_Mariia.postman_collection.json \
+          -e Trello_testing_Mariia.postman_environment.json \
+          -r cli,htmlextra --reporter-htmlextra-export report_html.html
+
+      - name: Check HTML report exists
+        run: ls 
+  
+
+       
+
+
 
