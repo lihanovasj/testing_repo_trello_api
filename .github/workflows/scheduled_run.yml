@@ -1,19 +1,16 @@
 name: Scheduled run
 
 on: 
-
   schedule:
-
-  - cron: 30 15 * * 1-5
-  - cron: 30 05 * * 6-7
+    - cron: '30 15 * * 1-5'
+    - cron: '30 05 * * 6,0'
+    
 
   push:
-
     branches:
       - main
 
   pull_request:
-
     branches:
       - main
   
