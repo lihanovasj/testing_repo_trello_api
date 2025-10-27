@@ -20,7 +20,7 @@ jobs:
  
   build:
     
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
 
@@ -37,10 +37,8 @@ jobs:
 
       - name: Run Postman collection with environment and generate reports
         run: |
-          newman run Trello_testing_Mariia.postman_collection.json \
-          -e Trello_testing_Maria_Prod.postman_environment.json \
-          -r cli,htmlextra --reporter-htmlextra-export report_html.html
-
+          newman run Trello_testing_Mariia.postman_collection.json -e Trello_testing_Maria_Prod.postman_environment.json -r cli,htmlextra --reporter-htmlextra-export report_html.html
+          
       - name: Check HTML report exists
         run: ls 
   
