@@ -31,11 +31,13 @@ jobs:
         uses: actions/setup-node@v4
       
       - name: Install Newman and Htmlextra reporter
+        shell: bash
         run: |
           npm install -g newman
           npm install -g newman-reporter-htmlextra
 
       - name: Run Postman collection with environment and generate reports
+        shell: bash 
         env:
           API_KEY_ENV: ${{ secrets.API_KEY }}
           API_TOKEN_ENV: ${{ secrets.API_TOKEN }}
@@ -43,6 +45,7 @@ jobs:
         run: "newman run Trello_testing_Mariia.postman_collection.json -e Trello_testing_Maria_Prod.postman_environment.json --env-var api_key=$API_KEY_ENV --env-var api_token=$API_TOKEN_ENV --env-var base_url=$BASE_URL_ENV -r cli,htmlextra --reporter-htmlextra-export report_html.html"
           
       - name: Check HTML report exists
+        shell: bash
         run: ls 
   
 
