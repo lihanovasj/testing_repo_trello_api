@@ -42,7 +42,11 @@ jobs:
           API_KEY_ENV: ${{ secrets.API_KEY }}
           API_TOKEN_ENV: ${{ secrets.API_TOKEN }}
           BASE_URL_ENV: ${{ secrets.BASE_URL }}
-        run: "newman run Trello_testing_Mariia.postman_collection.json -e Trello_testing_Maria_Prod.postman_environment.json --env-var api_key=$API_KEY_ENV --env-var api_token=$API_TOKEN_ENV --env-var base_url=$BASE_URL_ENV -r cli,htmlextra --reporter-htmlextra-export report_html.html"
+        run: | 
+          newman run Trello_testing_Mariia.postman_collection.json \
+          -e Trello_testing_Maria_Prod.postman_environment.json \
+          --env-var api_key=$API_KEY_ENV --env-var api_token=$API_TOKEN_ENV --env-var base_url=$BASE_URL_ENV \
+          -r cli,htmlextra --reporter-htmlextra-export report_html.html
           
       - name: Check HTML report exists
         shell: bash
