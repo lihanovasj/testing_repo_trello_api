@@ -29,12 +29,7 @@ jobs:
  
   build:
     
-    runs-on: ${{ 
-      github.event_name == 'workflow_dispatch' && 
-      github.event.inputs.os == 'windows' && 
-      'windows-latest' || 
-      'ubuntu-latest' 
-      }}
+    runs-on: ${{ inputs.os == 'windows' && 'windows-latest' || 'ubuntu-latest' }}
 
 
     steps:
@@ -61,11 +56,13 @@ jobs:
           newman run Trello_testing_Mariia.postman_collection.json \
           -e Trello_testing_Maria_Prod.postman_environment.json \
           --env-var api_key=$API_KEY_ENV --env-var api_token=$API_TOKEN_ENV --env-var base_url=$BASE_URL_ENV \
-          -r cli,htmlextra --reporter-htmlextra-export report_html.html
+          -r cli,htmlextra --reporter-htmlextra-export report.html
           
-      - name: Check HTML report exists
-        shell: bash
-        run: ls 
+      - name: upload report
+        uses: actions/upload-artifact@v4 
+        with:
+          name: reports 
+          path: report.html
   
 
        
