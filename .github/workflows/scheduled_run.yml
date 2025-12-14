@@ -63,6 +63,18 @@ jobs:
         with:
           name: reports 
           path: report.html
+
+      - name: sent mail report
+        uses: dawidd6/action-send-mail@v6
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          subject: test report
+          to: lihanovasj@gmail.com
+          from: github action # <user@example.com>
+          attachments: report.html
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
   
 
        
